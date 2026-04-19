@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>補課組工作手冊討論資料</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+  :root {
+    --navy: #1A3A5C;
+    --blue: #2E5F8A;
+    --lightblue: #EEF4FA;
+    --accent: #C8860A;
+    --bold-color: #8B1A1A;
+    --text: #2C2C2C;
+    --muted: #888;
+    --border: #D0DDE8;
+    --bg: #F7F5F0;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── 側欄 ── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 240px;
+    background: var(--navy);
+    color: #fff;
+    padding: 32px 0;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .sidebar-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #AAC4DE;
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 16px;
+  }
+
+  .sidebar nav a {
+    display: block;
+    padding: 9px 24px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 400;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border-left-color: #C8860A;
+  }
+
+  .sidebar-note {
+    margin: 24px 24px 0;
+    padding: 12px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  .sidebar-note span {
+    display: inline-block;
+    font-weight: 700;
+    color: #C8860A;
+    margin-right: 4px;
+  }
+
+  /* ── 主內容 ── */
+  .main {
+    margin-left: 240px;
+    padding: 0 0 80px;
+  }
+
+  /* 頁首 */
+  .hero {
+    background: var(--navy);
+    padding: 56px 64px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,0.04);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: 80px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 25px solid rgba(200,134,10,0.15);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.55);
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .hero-legend {
+    margin-top: 28px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-dot.original { background: #AAC4DE; }
+  .legend-dot.added { background: var(--accent); }
+
+  /* 章節容器 */
+  .chapter {
+    padding: 56px 64px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chapter:last-child { border-bottom: none; }
+
+  .chapter-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .chapter-num {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .chapter-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1px;
+  }
+
+  /* 小節 */
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--lightblue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 4px; height: 16px;
+    background: var(--blue);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* 條列 */
+  ul.items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  ul.items li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.75;
+    transition: background 0.15s;
+  }
+
+  ul.items li:hover {
+    background: rgba(46,95,138,0.04);
+  }
+
+  ul.items li::before {
+    content: '•';
+    color: var(--blue);
+    font-size: 16px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  ul.items li.added {
+    background: #FFF8EE;
+    border-left: 3px solid var(--accent);
+    font-weight: 500;
+    color: #5C3A00;
+  }
+
+  ul.items li.added::before {
+    color: var(--accent);
+  }
+
+  ul.items li.added:hover {
+    background: #FFF3DC;
+  }
+
+  /* 步驟流程 */
+  .steps {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 20px;
+    background: var(--lightblue);
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+
+  .step {
+    background: var(--navy);
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .step-arrow {
+    color: var(--blue);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* 表格 */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  thead tr {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--lightblue);
+  }
+
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* 備註卡片 */
+  .note-card {
+    background: #FFF8EE;
+    border: 1px solid #E8C97A;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #5C3A00;
+    margin: 12px 0;
+    line-height: 1.7;
+  }
+
+  .note-card strong {
+    color: var(--accent);
+  }
+
+  /* 手機適配 */
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .hero { padding: 36px 24px 32px; }
+    .chapter { padding: 36px 24px 28px; }
+    .hero h1 { font-size: 26px; }
+  }
+
+  /* 回頂部 */
+  .back-top {
+    position: fixed;
+    right: 28px; bottom: 28px;
+    width: 44px; height: 44px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+
+  .back-top:hover { transform: translateY(-3px); }
+</style>
+</head>
+<body>
+
+<!-- 側欄 -->
+<aside class="sidebar">
+  <div class="sidebar-title">補課組工作手冊</div>
+  <nav>
+    <a href="#ch1">一、補課前</a>
+    <a href="#ch2">二、補課中</a>
+    <a href="#ch3">三、補課後</a>
+    <a href="#ch4">四、硬體設備</a>
+    <a href="#ch5">五、交接班</a>
+    <a href="#ch6">六、接待禮儀</a>
+    <a href="#ch7">七、請假程序</a>
+    <a href="#ch8">八、一般守則</a>
+  </nav>
+  <div class="sidebar-note">
+    <span>●</span> 一般條文<br>
+    <span style="color:#E8A020">●</span> 粗體橘色為補充建議項目
+  </div>
+</aside>
+
+<!-- 主內容 -->
+<div class="main">
+
+  <!-- 頁首 -->
+  <div class="hero">
+    <div class="hero-tag">補課組</div>
+    <h1>補課組工作手冊</h1>
+    <div class="hero-sub">草案 115/04/18 </div>
+    <div class="hero-legend">
+      <div class="legend-item">
+        <div class="legend-dot original"></div>
+        原始規定條文
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot added"></div>
+        補充建議項目（橘底）
+      </div>
+    </div>
+  </div>
+
+  <!-- 一、補課前 -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-header">
+      <div class="chapter-num">一</div>
+      <div class="chapter-title">補課前</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">報到流程</div>
+      <div class="steps">
+        <span class="step">提早10分鐘抵達</span>
+        <span class="step-arrow">→</span>
+        <span class="step">照客櫃台報到打勾</span>
+        <span class="step-arrow">→</span>
+        <span class="step">禮佛</span>
+        <span class="step-arrow">→</span>
+        <span class="step">美工室白板簽到</span>
+        <span class="step-arrow">→</span>
+        <span class="step">回補課教室</span>
+      </div>
+      <ul class="items">
+        <li>提早十分鐘抵達，與前一班組員交接，護念彼此。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">上線自我評量</div>
+      <ul class="items">
+        <li>檢查平板有沒有電，發現不到50%電量的平板，放在充電層待充。（沒有使用的平板也會耗電）</li>
+        <li>檢查抽屜內的轉接器和耳機是否相連未拔，如發現請分離歸在正確抽屜。</li>
+        <li>檢查補課登記表是否已寫滿需繳回書記室。</li>
+        <li>檢查已經過期的小平板設備，應盡快放回書記室門口櫃子下方塑膠籃。</li>
+        <li>檢查清消物料是否不足，如果有缺，回報組長。</li>
+        <li>跟上一班交接坡務內容後，也交接給比自己晚到的下一班師兄。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">確認補課名單</div>
+      <ul class="items">
+        <li class="added">上線後主動至知客室確認當日預計來補課的學員名單與班別。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">設備備妥檢查</div>
+      <ul class="items">
+        <li>早班義工上線時先接上充電線，午班義工上線時取下充電線，將充好電的平板放在補課專車最上層（最上層只放置一台），其餘收在最下層。</li>
+        <li>補課專車由早班義工從知客室櫃台內推出。</li>
+        <li class="added">逐一確認補課專車上各抽屜設備齊全：平板、耳機、轉接器、支架、借用登記表、補課登記表、護貝補課須知、筆筒。</li>
+        <li class="added">確認紅色資料夾內備用表格是否充足，發現剩一張時至知客室影印，至少留2張在資料夾內。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">確認班表與交接</div>
+      <ul class="items">
+        <li>上線時先觀察補課登記表和借用物品登記表，與現場實際使用狀況是否有出入，如有疑問趕快請教上一班的義工。</li>
+        <li>交接內容涵蓋人、事、時、地、物，當有問題時多一句關心與確認姓名、法名，可以幫助每個環節釐清事實。</li>
+        <li class="added">交接時確認是否有逾期申請單夾在平板內尚未處理，若有，確認學員是否當日預計來補課。</li>
+        <li class="added">交接時確認是否有補課到一半尚未完成的學員，了解補到第幾分鐘，下次預約時段。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 二、補課中 -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-header">
+      <div class="chapter-num">二</div>
+      <div class="chapter-title">補課中</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">確認補課類型</div>
+      <ul class="items">
+        <li>學員來時統一詢問：未超過一個月正常線上補課？逾期補課？申請重聽？補靜坐？</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">一般補課</div>
+      <ul class="items">
+        <li>一般補課期限：缺課日隔週一起算，31日內完成。</li>
+        <li>學員進入補課主頁後輸入姓名，若法名對不上，點「往下箭頭」找同名同姓的師兄。</li>
+        <li>學員手機上線後查無補課內容，先判斷三種可能：已逾期、晚到早退出席表不算缺課、精舍系統尚未更新。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">逾期補課</div>
+      <ul class="items">
+        <li>先到知客室查詢紀錄表，確認缺哪一堂，再引導填寫逾期補課單。</li>
+        <li>逾期補課單經法師簽核後，最快隔日設備才能準備好，當場確認學員下次來的日期與時段。</li>
+        <li>學員逾期補課，有寫補課單但平板沒有檔案，依照學員班別取「班別USB」進行檔案拷貝至平板。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">補課到一半中途離開</div>
+      <ul class="items">
+        <li>在原登記單上寫補到第幾分鐘，修改下次日期與時段，單子與設備一同放回書記室，備註從第幾分鐘開始播放供下次接班義工參考。</li>
+        <li>回報小組長，以利關心後續交接。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">引導連線與操作硬體</div>
+      <ul class="items">
+        <li>連線方式一：開相機掃描二維碼。</li>
+        <li>連線方式二：Google輸入網址 zen.ctcm.org.tw。</li>
+      </ul>
+      <div class="steps" style="margin-top:10px;">
+        <span class="step">第一次連線</span>
+        <span class="step-arrow">開飛航</span>
+        <span class="step-arrow">→</span>
+        <span class="step-arrow">開WIFI</span>
+        <span class="step-arrow">→</span>
+        <span class="step">連上 zenclass</span>
+      </div>
+      <div class="steps">
+        <span class="step">有經驗學員</span>
+        <span class="step-arrow">開飛航</span>
+        <span class="step-arrow">→</span>
+        <span class="step-arrow">開WIFI</span>
+        <span class="step-arrow">→</span>
+        <span class="step">自動連上 zenclass</span>
+      </div>
+      <ul class="items">
+        <li>未開飛航的隱憂：來電可能斷網、畫面當機、學員可能同時收發LINE，務必提醒學員先開飛航。</li>
+        <li>幫學員設定手機的同時，提出補課須知護貝資料，引導學員閱讀注意事項。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">座位引導</div>
+      <ul class="items">
+        <li>男眾坐東單，女眾坐西單。</li>
+        <li>空的長條桌，先引導學員坐靠兩側的位子，以免中央走道兩側位子入座時影響他人用功。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">借用設備</div>
+      <ul class="items">
+        <li>借用平板、耳機、支架、轉接器時，確實填寫該設備的號碼。</li>
+        <li>由補課學員自行填寫借用登記表，義工於表格中點交簽名。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">斷線處理</div>
+      <ul class="items">
+        <li>回到補課系統首頁，重新登入一次，就會從補到一半的地方繼續播放。</li>
+        <li>耐心向學員說明上列內容，使學員安心。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">補課中注意事項</div>
+      <ul class="items">
+        <li>學員開始補課後不打斷學員。</li>
+        <li>19:30後來補課者，先請示知客室值班法師，詢問時表明學員班組別、姓名、法名及補課類型，由法師決定是否開方便。</li>
+        <li>上午08:30-09:00和晚上18:30-19:00補課教室為學員長會議之用，義工暫時移動到大雄寶殿西單實木桌椅，引導來補課的學員。</li>
+        <li class="added">義工於值班期間機動檢查所有平板電量，發現不足50%應主動協助充電至100%。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 三、補課後 -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-header">
+      <div class="chapter-num">三</div>
+      <div class="chapter-title">補課後</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">確認補課完成</div>
+      <ul class="items">
+        <li>逾期補課平板歸還時：申請單標示完成時間與簽名，連同平板拿到書記室門口書櫃下方盒子。</li>
+        <li>補課到一半離開的學員：單子與設備放回書記室，備註從第幾分鐘開始播放。</li>
+        <li>平板有夾逾期申請單但學員當日未來：當日最後一班將申請單和平板一併繳回書記室。</li>
+        <li>補課登記表寫滿時：立刻送回書記室。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">設備歸還點交</div>
+      <ul class="items">
+        <li>義工於表格中點交簽名。</li>
+        <li>逐一檢查每一個抽屜是否放置正確的設備，有缺少時立即回報組長。</li>
+        <li>發現耳機與轉接線未分開，應分別放在正確的抽屜內。</li>
+        <li>設備歸還時，取一顆酒精棉花球給學員自行清消。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">引導學員離開</div>
+      <div class="steps">
+        <span class="step">關飛航</span>
+        <span class="step-arrow">→</span>
+        <span class="step">關WIFI</span>
+        <span class="step-arrow">→</span>
+        <span class="step">開行動數據</span>
+        <span class="step-arrow">→</span>
+        <span class="step">打開LINE測試</span>
+      </div>
+      <ul class="items">
+        <li class="added">感恩學員發心補課，提醒下次補課期限。</li>
+        <li class="added">學員未補完提前離開時，告知已記錄補到第幾分鐘，請學員確認下次預約時段。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 四、硬體設備 -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-header">
+      <div class="chapter-num">四</div>
+      <div class="chapter-title">硬體設備</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">設備品項與操作重點</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>設備／物品</th><th>操作重點</th></tr></thead>
+          <tbody>
+            <tr><td>大平板</td><td>借用時登記設備號碼；電量不足50%放充電層待充</td></tr>
+            <tr><td>小平板</td><td>無充電線，沒電時繳回書記室；逾期過期設備放回書記室門口櫃子下方塑膠籃</td></tr>
+            <tr><td>耳機</td><td>歸還時與轉接線分開，分別放置於正確抽屜</td></tr>
+            <tr><td>轉接器（轉接線）</td><td>與耳機分離收納於正確抽屜</td></tr>
+            <tr><td>手機支架</td><td>借用時填寫借用登記表，歸還時主動簽名</td></tr>
+            <tr><td>充電線</td><td>早班接上充電；午班取下，充飽電平板放專車最上層（僅一台），其餘收最下層</td></tr>
+            <tr><td>冷氣遙控器1</td><td>收坡巡查冷氣專用，天花板亮綠燈時對準感應器，燈號熄滅表示關機成功</td></tr>
+            <tr><td>補課專車（推車）</td><td>早班從知客室推出；當日最後一班推回知客室</td></tr>
+            <tr><td>板夾</td><td>放置各式表格供當班使用</td></tr>
+            <tr><td>紅色資料夾</td><td>存放備用表格；發現剩一張時至知客室影印，至少留2張，影印後原稿放回</td></tr>
+            <tr><td>班別USB</td><td>逾期平板無檔案時，依學員班別取對應USB進行拷貝</td></tr>
+            <tr><td>酒精棉花球</td><td>設備歸還時清消，取一顆給學員自行清消</td></tr>
+            <tr><td>不織布</td><td>剪成8小張放鐵盒，義工下線前取小張清消桌椅</td></tr>
+            <tr><td>補課專車上的筆筒</td><td>備用筆存放處，發現沒水的筆直接丟棄，勿放回</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">表單文具品項</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>表單／文具</th><th>用途與操作重點</th></tr></thead>
+          <tbody>
+            <tr><td>補課登記表</td><td>學員報到登記用，寫滿立即送書記室</td></tr>
+            <tr><td>借用設備登記表</td><td>借還設備時填寫，義工於表格中點交簽名</td></tr>
+            <tr><td>未著居士服登記表</td><td>學員未穿居士服時填寫留存</td></tr>
+            <tr><td>逾期補課申請單</td><td>逾期學員填寫，法師簽核後生效；完成後連同平板送書記室門口書櫃下方盒子</td></tr>
+            <tr><td>護貝補課須知</td><td>設定手機時一併提示學員閱讀</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">設備損壞處理</div>
+      <div class="steps">
+        <span class="step">義工發現</span>
+        <span class="step-arrow">→</span>
+        <span class="step">回報小組長</span>
+        <span class="step-arrow">→</span>
+        <span class="step">小組長測試</span>
+        <span class="step-arrow">→</span>
+        <span class="step">確認報修</span>
+      </div>
+      <ul class="items">
+        <li class="added">發現損壞設備立即標示，不放回原位繼續流通。</li>
+        <li class="added">報修後追蹤維修進度，回報組長確認修復完成。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">冷氣使用規範</div>
+      <ul class="items">
+        <li>一般冷氣僅開後區，補課人數（不含義工）達4人時可增開中區，前區不使用。</li>
+        <li>晚班皆無學員補課，可視情況提早關閉全部冷氣，開後門通風。</li>
+        <li class="added">開關冷氣權責：由當班義工判斷，不確定時請示組長。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 五、交接班 -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-header">
+      <div class="chapter-num">五</div>
+      <div class="chapter-title">交接班</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">交接程序</div>
+      <ul class="items">
+        <li>提早十分鐘抵達，與前一班組員交接，護念彼此。</li>
+        <li>上線時先觀察補課登記表和借用物品登記表，與現場實際使用狀況是否有出入，如有疑問趕快請教上一班的義工。</li>
+        <li>交接內容涵蓋人、事、時、地、物，當有問題時多一句關心與確認姓名、法名，可以幫助每個環節釐清事實。</li>
+        <li>跟上一班交接坡務內容後，也交接給比自己晚到的下一班師兄。</li>
+        <li class="added">交接時口頭確認當班是否有異常狀況、待處理事項、需回報組長的事件。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">物料點交</div>
+      <ul class="items">
+        <li>逐一檢查每一個抽屜是否放置正確的設備，有缺少時立即回報組長。</li>
+        <li>發現耳機與轉接線未分開，應分別放在正確的抽屜內。</li>
+        <li>檢查平板電量，發現不到50%電量的平板，放在充電層待充。</li>
+        <li>檢查抽屜內的轉接器和耳機是否相連未拔，如發現請分離歸在正確抽屜。</li>
+        <li>檢查清消物料是否不足，如果有缺，回報組長。</li>
+        <li>檢查已經過期的小平板設備，應盡快放回書記室門口櫃子下方塑膠籃。</li>
+        <li class="added">確認紅色資料夾內備用表格是否充足。</li>
+        <li class="added">確認補課專車上筆筒內的筆是否有水，發現沒水的筆直接丟棄。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">登記表確認</div>
+      <ul class="items">
+        <li>檢查補課登記表是否已寫滿需繳回書記室。</li>
+        <li>確認借用物品登記表與現場實際設備數量是否相符。</li>
+        <li class="added">確認是否有逾期申請單夾在平板內尚未處理。</li>
+        <li class="added">確認是否有補課到一半尚未完成的學員紀錄，了解補到第幾分鐘及下次預約時段。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">與照客交接</div>
+      <ul class="items">
+        <li>補課設備登記表交接給照客後，請照客在單子上簽名確認點交完成。</li>
+        <li>補課專車推回知客室時，物料擺放整齊在正確的架子上，維護櫃台門面整潔。</li>
+        <li>若精舍未關山門且下一班無義工，柔軟語請示照客組長幫忙關心可能即將來的補課學員。</li>
+        <li class="added">照客未簽名時，主動再次請照客確認並簽名，不帶走未完成點交的設備。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">簽退</div>
+      <ul class="items">
+        <li>於美工室白板完成簽退時間。</li>
+        <li class="added">簽退前確認個人物品已帶走，勿遺留於補課教室。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 六、接待禮儀 -->
+  <div class="chapter" id="ch6">
+    <div class="chapter-header">
+      <div class="chapter-num">六</div>
+      <div class="chapter-title">接待禮儀</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">迎接學員</div>
+      <ul class="items">
+        <li>義工出坡時穿著橘T，胸前配戴名牌。</li>
+        <li class="added">學員進入補課教室時，主動起身迎接，確認來意。</li>
+        <li>學員來時統一詢問：未超過一個月正常線上補課？逾期補課？申請重聽？補靜坐？</li>
+        <li class="added">以柔軟語引導學員，態度親切，使學員安心。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">引導就座</div>
+      <ul class="items">
+        <li>男眾坐東單，女眾坐西單。</li>
+        <li>空的長條桌，先引導學員坐靠兩側的位子，以免中央走道兩側位子入座時影響他人用功。</li>
+        <li class="added">引導就座後，協助學員設定手機連線，同時提出補課須知護貝資料引導閱讀。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">居士服勸導</div>
+      <ul class="items">
+        <li>學員未穿居士服時，口頭柔軟勸導：「補課視同正式上課，請穿著居士服。初級班學員可著便服。」</li>
+        <li>詢問學員：「請問您今天有帶居士服嗎？」並協助填寫未著居士服登記表。</li>
+        <li>如需購買居士服，告知可請學長協助至中台世界博物館禮品部購買。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">補課中關懷</div>
+      <ul class="items">
+        <li>網路斷線時，耐心向學員說明回到補課系統首頁重新登入即可從補到一半的地方繼續，使學員安心。</li>
+        <li>學員補課時做出違規舉動，不直接碰觸學員身體，以柔軟語提醒。</li>
+        <li>學員開始補課後不打斷學員。</li>
+        <li>請勿在補課區後方聊天交談講話，以免影響補課師兄用功。</li>
+        <li class="added">義工保持用功狀態，以身作則護念補課學員。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">特殊狀況應對</div>
+      <ul class="items">
+        <li>19:30後來補課者，先請示知客室值班法師，詢問時表明學員班組別、姓名、法名及補課類型，由法師決定是否開方便。</li>
+        <li>上午08:30-09:00和晚上18:30-19:00補課教室為學員長會議之用，義工暫時移動到大雄寶殿西單實木桌椅，引導來補課的學員。</li>
+        <li>夜研學員週一18:30來補課，若影片內容會超過19:30，柔軟語告知師兄19:30為正式課程，把握時間進禪堂用功為主；並於19:20提醒學員上課時間快到了，沒有補完的範圍擇日再補。</li>
+        <li>無法解決問題時，覺察自己的煩躁，立刻停止惡念，先安撫學員，勇於請教組長或照客。</li>
+        <li class="added">遇到設備問題無法解決時，柔軟語告知學員：「自己正在學習中，很抱歉耽誤您寶貴的時間，趕快再幫忙詢問看看。」</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">學員離開</div>
+      <ul class="items">
+        <li>引導學員離開補課教室前恢復手機正常狀態：關飛航 → 關WIFI → 開行動數據 → 打開LINE測試可否正常收發訊息。</li>
+        <li class="added">感恩學員發心補課，提醒下次補課期限。</li>
+        <li class="added">學員未補完提前離開時，告知已記錄補到第幾分鐘，請學員確認下次預約時段。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">電話應對</div>
+      <div class="note-card"><strong>注意：</strong>以下為建議建立之SOP，附件資料無相關內容。</div>
+      <ul class="items">
+        <li class="added">接聽電話開場白：「阿彌陀佛，這裡是補課組，請問有什麼需要協助的？」</li>
+        <li class="added">學員來電詢問補課期限：告知缺課日隔週一起算，31日內完成。</li>
+        <li class="added">學員來電詢問如何連線：告知開飛航→開WIFI→連上zenclass，或輸入網址zen.ctcm.org.tw。</li>
+        <li class="added">學員來電詢問逾期如何處理：告知需來精舍填寫逾期補課單，經法師簽核後隔日安排設備。</li>
+        <li class="added">無法回答的問題：告知學員稍後由組長回覆，並立即回報組長處理。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 七、請假程序 -->
+  <div class="chapter" id="ch7">
+    <div class="chapter-header">
+      <div class="chapter-num">七</div>
+      <div class="chapter-title">請假程序</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">請假方式</div>
+      <ul class="items">
+        <li>提前告知組長，說明請假日期與時段。</li>
+        <li>如果當天臨時請假，請組長協助告知交接班的師兄，以免夥伴空等。</li>
+        <li>除了告知組長以外，也同時告知同一班的組員自己會晚到或請假。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">請假類別與補班規則</div>
+      <ul class="items">
+        <li>請假須補班、換班、或代班。</li>
+        <li>代班是福報存款，不當作補班。</li>
+        <li>請假可以向師兄換班，換班之後不用再補班。</li>
+        <li>預約看診需要補班。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">出勤異常處理</div>
+      <ul class="items">
+        <li>義工無故消失，無法聯繫，也沒有回報請假，也沒有讀LINE訊息，3天後進行通報。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 八、一般守則 -->
+  <div class="chapter" id="ch8">
+    <div class="chapter-header">
+      <div class="chapter-num">八</div>
+      <div class="chapter-title">一般守則</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">服裝</div>
+      <ul class="items">
+        <li>補課組義工出坡時穿著橘T，胸前配戴名牌。</li>
+        <li>不建議穿居士服，容易跟補課學員混淆辨識度。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">物料管理</div>
+      <ul class="items">
+        <li>清消物料不足時，每一班隨時關心不足情況，回報任何一位組長，組長回報執秘安排採購。</li>
+        <li>不織布剪成8小張放在鐵盒子裡，義工下線前取用小張的清消桌椅。</li>
+        <li>紅色資料夾內，如發現剩一張，請拿到知客室影印，並至少留2張在資料夾內。</li>
+        <li>如發現筆沒水，請直接丟掉，勿再放回筆筒。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">個人物品</div>
+      <ul class="items">
+        <li class="added">義工個人物品請勿放置於補課教室，下哨前確認個人物品已帶走。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">用功守則</div>
+      <ul class="items">
+        <li>請勿在補課區後方聊天交談講話，以免影響補課師兄用功。</li>
+        <li>補課操作系統還不熟悉時，可預約組長在非值班的時間來精舍學習，反覆練習。</li>
+        <li>每次出坡時向已經學會的組員請教，請教時可在大雄寶殿西單桌椅區討論。</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">財產與設備</div>
+      <ul class="items">
+        <li>平板或耳機等設備損壞，義工回報小組長，小組長測試，若有問題就報修。</li>
+        <li>小平板補課設備如果沒有電，要繳回書記室，因為補課組沒有對應的充電線。</li>
+        <li class="added">財產清冊製作中，各班義工協助確認設備數量與狀況。</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<a href="#" class="back-top" title="回頂部">↑</a>
+
+<script>
+  // 側欄 active 狀態
+  const chapters = document.querySelectorAll('.chapter');
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const id = entry.target.id;
+        const link = document.querySelector(`.sidebar nav a[href="#${id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  chapters.forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
